@@ -1,0 +1,2 @@
+For z=4.000000 er det interpolerede punkt via. min implementering: 16.000000
+For z=4.000000 giver integralet fra starten af datasættet til z: 21.500000

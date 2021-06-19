@@ -1,0 +1,4 @@
+Del A:
+Besvaret med plottet, plot.svg
+Jeg skulle ligeledes finde half-life af Ra-224, den kan også ses i data.txt,
+jeg har fundet den til at være 4.41 dage.
