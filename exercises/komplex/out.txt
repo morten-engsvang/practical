@@ -1,0 +1,5 @@
+testing komplex add:
+a= (1,2)
+b= (3,4)
+a+b should be =  (4,6)
+a+b is actually =  (4,6)

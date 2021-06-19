@@ -1,0 +1,23 @@
+FLT_EPSILON = 0.000000
+My float epsilon via. while loop = 0.000000
+My float epsilon via. for loop = 0.000000
+My float epsilon via. do-while loop = 0.000000
+DBL_EPSILON = 2.22045e-16
+My double epsilon via. while loop = 2.22045e-16
+My double epsilon via. for loop = 2.22045e-16
+My double epsilon via. do-while loop = 2.22045e-16
+LDBL_EPSILON = 1.0842e-19
+My long double epsilon via. while loop = 1.0842e-19
+My long double epsilon via. for loop = 1.0842e-19
+My long double epsilon via. do-while loop = 1.0842e-19
+sum_up_float = 15.403683
+sum_down_float = 18.807919
+Forskellen skyldes at vi bruger float typen. Den har en begrænset præcision
+Jeg forsøger derfor med max = int_max/1.5
+Det burde dog ikke virke da det giver led der er næsten lig 0
+sum_up_float = 15.403683
+sum_down_float = 18.807919
+Jeg forsøger nu det samme med double
+sum_up_double = 21.3716
+sum_down_double = 21.3716
+De to summer konvergerer, da vi nu har mere præcision på vores tal pga. datatype

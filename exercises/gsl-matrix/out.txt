@@ -1,0 +1,6 @@
+Solutions is x:
+   -1.1379   -2.83303   0.851459 
+A*x then gives b:
+      6.23       5.37       2.29 
+It should be equal to b:
+      6.23       5.37       2.29 
