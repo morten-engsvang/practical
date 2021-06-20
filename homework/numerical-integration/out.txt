@@ -1,0 +1,28 @@
+I have set the maximum allowed amount of recursions at 1000
+Test 1: f(x) = sqrt(x) from 0 to 1 without Clenshaw-Curtis
+The result of test 1: 0.666178
+The number of evaluations in test 1: 12016
+Test 2: f(x) = 4*sqrt(1-x^2) from 0 to 1 without Clenshaw-Curtis
+The result of test 2: 3.14214
+The error is: 0.000547943
+The number of evaluations in test 2: 273756
+Test 3: f(x) = 1/sqrt(x) from 0 to 1 without Clenshaw-Curtis
+The result of test 3: 2.00006
+The number of evaluations in test 3: 17073792
+Test 4: f(x) = 1/sqrt(x) from 0 to 1 with Clenshaw-Curtis
+The result of test 4: 1.99969
+The number of evaluations in test 4: 130336
+Test 5: repeat of test 2 but with Clenshaw-Curtis
+The result of test 5: 3.14201
+The error is: 0.000414681
+The number of evaluations in test 5: 343640
+I can calculate the same using the QACS subsroutine from the GSL library
+Result, error and number of function evaluations are: 
+3.14160223309539
+9.57950560120935e-06
+63
+-------------------------
+A remarkable reduction in evaluations is observed for the integral 1/sqrt(x) from 0 to 1
+Using Clenshaw-Curtis to the pi integral gives a small reduction in error,
+but also increases the amount of evaluations significantly.
+The GSL routine beats me by a long shot both in error and function evaluations
