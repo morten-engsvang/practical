@@ -1,0 +1,8 @@
+Test 1 is: U(x) = 4*sqrt(1-x^2) from 0 to 1, to see if it works at all.
+The result of test 1 is: 3.13771
+The estimated error of test 1 is: 0.0271065
+The expected result is: 3.14159 and the actual error is then: 0.0038873
+Test 2 is the same U(x) but now f(x,y,z) = U(x)*U(y)*U(z)
+The result of test 2 is: 9.42836
+The estimated error of test 2 is: -nan
+The expected result is: 31.0063 and the actual error is then: 21.5779
