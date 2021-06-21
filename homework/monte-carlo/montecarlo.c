@@ -19,13 +19,21 @@ void plainmc(int dim, double f(int dim,gsl_vector* x), gsl_vector* a, gsl_vector
 	for (int i = 0; i < N; i++){
 		//Summerer over dimensionerne, da jeg betragter hver dimension for sig.
 		//Beregner værdien i en dimension, som jeg får brug for det.
-		double point = RND;
+		for (int i = 0; i < dim; i++){
+			gsl_vector_set(x,i, gsl_vector_get(a,i)+RND*(gsl_vector_get(b,i)-gsl_vector_get(a,i)));
+		}
+		double fx = f(dim,x);
+		sum += fx;
+		sum_sq += fx*fx;
+		
+		/*
 		for (int i = 0; i < dim; i++){
 			gsl_vector_set(x,i, gsl_vector_get(a,i)+point*(gsl_vector_get(b,i)-gsl_vector_get(a,i)));
-			double fx = f(i,x); //Funktionsværdien af punktet for i'te dimension
+			double fx = f(i,x) //Funktionsværdien af punktet for i'te dimension
 			sum += fx;
 			sum_sq += fx*fx;
 		}
+		*/
 	}
 	double mean = sum/N; //Forventningsværdien er summen af alle funktionsværdier divideret med antallet af punkter.
 	double sigma = sqrt(sum_sq/N-mean*mean); //Spredningen som defineret i ligning 4.

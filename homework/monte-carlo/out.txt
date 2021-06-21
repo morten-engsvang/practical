@@ -1,8 +1,15 @@
+This is part A:
 Test 1 is: U(x) = 4*sqrt(1-x^2) from 0 to 1, to see if it works at all.
-The result of test 1 is: 3.13771
-The estimated error of test 1 is: 0.0271065
-The expected result is: 3.14159 and the actual error is then: 0.0038873
+The result of test 1 is: 3.1416
+The estimated error of test 1 is: 0.00282808
+The expected result is: 3.14159 and the actual error is then: 1.01973e-05
 Test 2 is the same U(x) but now f(x,y,z) = U(x)*U(y)*U(z)
-The result of test 2 is: 9.42836
-The estimated error of test 2 is: -nan
-The expected result is: 31.0063 and the actual error is then: 21.5779
+The result of test 2 is: 30.9957
+The estimated error of test 2 is: 0.0502571
+The expected result is: 31.0063 and the actual error is then: 0.0106095
+Test 3 is the integral given in the homework.
+The result of test 3 is: 1.39193
+The estimated error of test 3 is: 0.00406911
+I used 10000000 points.
+-----------------------
+This is part B
