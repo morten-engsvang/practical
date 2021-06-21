@@ -13,3 +13,12 @@ The estimated error of test 3 is: 0.00406911
 I used 10000000 points.
 -----------------------
 This is part B
+I estimate error using two different sequences: err = fabs(result1-result2)/(N*volume)
+where result1 and result2 is from sampling N/2 points each for a total of N points.
+I can now test the scaling of the error, I have plotted the error in plot.svg and plot_actual.svg
+Where I have plotted the error estimates and the actual errors respectively
+I test it for the integral given in the homework
+Which means that the actual error is relative to: 1.3932It can seen that the plain Monte-Carlo integration error falls relatively quickly
+after which it begins oscillating around 0
+The error using the error using the quasi-random Halton sequence starts much lower and
+appears to be more stable. However it has weird dips in the actual error.

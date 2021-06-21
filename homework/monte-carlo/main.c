@@ -72,7 +72,28 @@ int main(void){
 	
 	printf("-----------------------\n");
 	printf("This is part B\n");
+	printf("I estimate error using two different sequences: err = fabs(result1-result2)/(N*volume)\n");
+	printf("where result1 and result2 is from sampling N/2 points each for a total of N points.\n");
+	printf("I can now test the scaling of the error, I have plotted the error in plot.svg and plot_actual.svg\n");
+	printf("Where I have plotted the error estimates and the actual errors respectively\n");
+	printf("I test it for the integral given in the homework\n");
 	
+	double actual = 1.3932039296856768591842462603255;
+	printf("Which means that the actual error is relative to: %g",actual);
+	dim = 3;
+	FILE * data = fopen("plot.txt","w");
+	for (int N2 = 10; N2 < 500; N2 += 5){
+		plainmc(dim,integral,a3,b3,N2,result_error);
+		double p_est_error = gsl_vector_get(result_error,1);
+		double p_act_error = fabs(gsl_vector_get(result_error,0)-actual);
+		haltonmc(dim,integral,a3,b3,N2,result_error);
+		double h_est_error = gsl_vector_get(result_error,1);
+		double h_act_error = fabs(gsl_vector_get(result_error,0)-actual);
+		fprintf(data, "%i %10g %10g %10g %10g\n", N2, p_est_error, p_act_error, h_est_error, h_act_error);
+	}
+	fclose(data);
+	printf("It can seen that the plain Monte-Carlo integration error falls relatively quickly\nafter which it begins oscillating around 0\n");
+	printf("The error using the error using the quasi-random Halton sequence starts much lower and\nappears to be more stable. However it has weird dips in the actual error.\n");
 	gsl_vector_free(a);
 	gsl_vector_free(b);
 	gsl_vector_free(result_error);
