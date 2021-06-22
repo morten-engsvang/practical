@@ -1,0 +1,13 @@
+Initial test for debugging:
+Root of x^3 = 3.9617e-05 with tolerance =     0.0001
+----------------------------------
+
+Extremum of Rosenbrocks function, with an inital guess of (2.5,-0.5)
+This gives a root of (1,1) with tolerance =     0.0001
+The value at this point is (3.6473e-09,-1.25056e-09)
+----------------------------------
+
+Now calculating for the schrodinger equation
+Initial guess for the energy is: -1 with tolerance 0.01
+The root of M(epsilon) = -0.500025
+The expected result is -0.5, so this is as expected.
