@@ -10,3 +10,8 @@ Starting from the point (1,-1) it took 65 steps.
 With an accuracy of 1e-05 and a maximum step limit of 100000
 --------------------------------------------
 
+Fitting the Breit-Wigner deviation function to the data gives a mass of 125.972, width of 2.08644 and scale-factor of 9.87673
+Starting from a value of 125.3, 2.03 and 2 respectively.
+From here it took 19807 steps with an accuracy of 1e-05 and a maximum step limit of 100000
+It is however very finicky--------------------------------------------
+
