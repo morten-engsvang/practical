@@ -1,0 +1,4 @@
+Number of steps used in optimisation used in the training was 10000
+Training is tested for the function f(x)=cos(5x-1)*exp(-x*x) from -1 to 1
+The result after training is printed in plit.svg
+Final parameters are printed in params.txt
