@@ -58,6 +58,8 @@ double linterp_integ(gsl_vector* x, gsl_vector* y, double z, int n){
 }
 
 
+
+
 int main(int argc, char** argv){
 	//Man skal give en tabel af x,y værdier og antallet af linjer som input, og værdien z,
 	//der skal interpoleres
@@ -73,40 +75,54 @@ int main(int argc, char** argv){
 	double tmp2;
 	do{
 		items = fscanf(input,"%lf %lf", &tmp1, &tmp2);
-		//printf("Hello, i = %d\n",i);
 		gsl_vector_set(x,i,tmp1);
 		gsl_vector_set(y,i,tmp2);
-		//printf("x: %lf og y: %lf\n",tmp1,tmp2);
 		i++;
 	}
 	while(i<n);
 	fclose(input);
-	/*
-	printf("I'm free!\n");
-	//Hurtigt debug:
-	vector_print("Tjekker x:",x);
-	vector_print("Tjekker y:",y);
-	double z = 3;
-	double tjek = linterp(x,y,z,n);
-	printf("For z=%lf får jeg punktet: %lf\n",z,tjek);
-	*/
-	//Jeg kan derefter integrere op til punktet z.
 	
-	//double integral = linterp_integ(x,y,z,n);
-	/*
-	printf("For z=%lf får jeg integralet fra start t.o.m. z: %lf\n",z,integral);
-	*/
 	FILE* output1=fopen("out_data.txt","w");
 	FILE* output2=fopen("out.txt","w");	
 	for(i=0;i<n-1;i++){
 		double xmin=gsl_vector_get(x,i),xmax=gsl_vector_get(x,i+1);
-		for(double temp=xmin;temp<=xmax;temp+=1.0/12) {
+		for(double temp=xmin;temp<=xmax;temp+=1.0/6) {
 			fprintf(output1,"%10g %10g\n",temp,linterp(x,y,temp,n));
 		}
 	}
 	double integral = linterp_integ(x,y,z,n);
-	fprintf(output2,"For z=%lf er det interpolerede punkt via. min implementering: %lf\n",z,linterp(x,y,z,n));
-	fprintf(output2,"For z=%lf giver integralet fra starten af datasættet til z: %lf\n",z,integral);
+	fprintf(output2,"Følgende er for lineær interpolation.\n");
+	fprintf(output2,"For z=%g er det interpolerede punkt via. min implementering: %g\n",z,linterp(x,y,z,n));
+	fprintf(output2,"For z=%g giver integralet fra starten af datasættet til z: %g\n",z,integral);
+	
+	
+	double xs[n],ys[n];
+	for (int i = 0; i < n; i++){
+		xs[i] = gsl_vector_get(x,i);
+		ys[i] = gsl_vector_get(y,i);
+	}
+	
+	FILE* outlspline = fopen("outlspline.txt","w");
+	FILE* outinteg = fopen("outlinteg.txt","w");
+	gsl_interp * linear = gsl_interp_alloc(gsl_interp_linear,n);
+	gsl_interp_init(linear,xs,ys,n);
+	/*
+	int xmin = 1;
+	int xmax = 11;
+	double nxmin = xmin*0.9;
+	double nxmax = xmax*0.9;
+	*/
+	for (int i = 0; i<(2*n); i++){
+		double z = 1.0+(11.0-1.0)*i/(2.0*n-1.0);
+		double interp_l = gsl_interp_eval(linear,xs,ys,z,NULL);
+		double integ_l=gsl_interp_eval_integ(linear,xs,ys,gsl_vector_get(x,0),z,NULL);
+		fprintf(outlspline,"%10g %10g\n",z,interp_l);
+		fprintf(outinteg,"%10g %10g\n",z,integ_l);
+	}
+	double integ_z=gsl_interp_eval_integ(linear,xs,ys,gsl_vector_get(x,0),4,NULL);
+	fclose(outlspline);
+	fclose(outinteg);
+	fprintf(output2,"For z = %g, så giver GSL integralet som: %g\n",z,integ_z);
 	//gsl_interp* w;
 	//w = gsl_interp_alloc(gsl_interp_linear,n);
 	//double interp = gsl_interp_eval(w,x,y,z);

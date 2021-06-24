@@ -1,2 +1,4 @@
-For z=4.000000 er det interpolerede punkt via. min implementering: 16.000000
-For z=4.000000 giver integralet fra starten af datasættet til z: 21.500000
+Følgende er for lineær interpolation.
+For z=4 er det interpolerede punkt via. min implementering: 16
+For z=4 giver integralet fra starten af datasættet til z: 21.5
+For z = 4, så giver GSL integralet som: 21.5
