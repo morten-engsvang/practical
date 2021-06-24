@@ -4,6 +4,7 @@ LDLIBS = -lm
 LDLIBS += $(shell gsl-config --libs)
 
 default: main
+	./$< > out.txt
 
 main: main.o qr.o rkstep12.o
 

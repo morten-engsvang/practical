@@ -13,4 +13,6 @@ void GS_solve(
 	gsl_vector* x /* Tom n vektor, hvor løsningen placeres*/
 );
 
+void GS_inverse(gsl_matrix* Q, gsl_matrix* R, gsl_matrix* B);
+
 #endif

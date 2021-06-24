@@ -1,0 +1,12 @@
+A minimum of the Rosenbrock's valley function is (0.999985,0.99997)
+The value at this point is 2.30637e-10
+Starting from the point (1,-1) it took 22178 steps.
+With an accuracy of 1e-05 and a maximum step limit of 100000
+--------------------------------------------
+
+A minimum of the Himmelblau's function is (3,2)
+The value at this point is 7.15638e-13
+Starting from the point (1,-1) it took 65 steps.
+With an accuracy of 1e-05 and a maximum step limit of 100000
+--------------------------------------------
+
