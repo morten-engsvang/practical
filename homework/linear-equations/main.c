@@ -1,9 +1,11 @@
 #include<stdio.h>
 #include<gsl/gsl_vector.h>
 #include<gsl/gsl_matrix.h>
+#include<gsl/gsl_linalg.h>
 #include<math.h>
 #include<stdlib.h>
 #include<gsl/gsl_blas.h>
+#include <time.h>
 #define RND (double)rand()/RAND_MAX
 
 void backsub(gsl_matrix* U, gsl_vector* c){
@@ -87,6 +89,44 @@ void GS_inverse(gsl_matrix* Q, gsl_matrix* R, gsl_matrix* B){
         gsl_vector_free(b);
 }
 
+void measure_time(int Nmax){
+	FILE * outmeasuretime = fopen("outtime.txt","w");
+	
+	for (int i = Nmax/2; i < Nmax; i++){
+		gsl_matrix* A = gsl_matrix_alloc(i,i);
+		for(int j=0;j<A->size1;j++){
+		        for(int k=0;k<A->size2;k++){
+		                gsl_matrix_set(A,j,k,RND);
+		        }
+		}
+		gsl_matrix* R = gsl_matrix_alloc(i,i);
+		gsl_matrix* A_copy = gsl_matrix_alloc(i,i);
+		gsl_matrix_memcpy(A_copy,A);
+		gsl_vector* tau = gsl_vector_alloc(i);
+		clock_t tic = clock();
+		GS_decomp(A,R);
+		clock_t toc = clock();
+		clock_t ticgsl = clock();
+			gsl_linalg_QR_decomp(A_copy,tau);
+		clock_t tocgsl = clock();
+		
+		double myTime = (double)(toc-tic) / CLOCKS_PER_SEC;
+		double gslTime = (double)(tocgsl-ticgsl) / CLOCKS_PER_SEC;
+		
+		//fprintf(outmeasuretime,"%i %10g %10g\n",i,myTime/pow(i,3),gslTime/pow(i,3));
+		fprintf(outmeasuretime,"%i %10g %10g\n",i,myTime,gslTime);
+		
+		gsl_matrix_free(A);
+		gsl_matrix_free(R);
+		gsl_matrix_free(A_copy);
+		gsl_vector_free(tau);
+	}
+    	fclose(outmeasuretime);
+    
+  
+	
+
+}
 
 int main() {
 	int n = 3,m = 5;
@@ -171,6 +211,8 @@ int main() {
 	printf("B*A=\n");
 	gsl_blas_dgemm(CblasNoTrans,CblasNoTrans,1,B,A_square,0,inv_tjek);
 	gsl_matrix_fprintf(stdout,inv_tjek,"%g");
+	int Nmax = 300;
+	measure_time(Nmax);
 	gsl_matrix_free(A_square);
 	gsl_matrix_free(Q_square);
 	gsl_matrix_free(R_square);
