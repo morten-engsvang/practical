@@ -1,0 +1,12 @@
+Del A:
+Besvaret med plottet, plot.svg
+Jeg skulle ligeledes finde half-life af Ra-224:
+half-life = 4.04 days
+The modern value is 3.63 days
+
+Del B:
+My value with uncertainty is: 4.04+-0.12Therefore it does not agree with the modern value.
+
+Del C:
+Se plot.svg, har gjort samme som Fedorov, hvor jeg plotter med plus eller minus
+usikkerheden for de forskellige koefficienter
