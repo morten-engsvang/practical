@@ -26,3 +26,6 @@ Til sidst tjekker jeg om V^T*T=I:V^T*T=
    -0.000    1.000   -0.000
    -0.000   -0.000    1.000
 DelB---------------------------------------------
+Jeg har konstrueret og diagonaliseret Hamilton operatoren.
+Egenværdierne kan ses sammen med de analytiske værdier i energy.txt
+Egenfunktionerne kan ses i eigen.png og egenværdierne er plottet i energy.png

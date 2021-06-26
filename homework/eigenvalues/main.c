@@ -143,8 +143,6 @@ int main(void){
 	printf("Til sidst tjekker jeg om V^T*T=I:");
 	gsl_blas_dgemm(CblasTrans,CblasNoTrans,1,V,V,0,tjek2);
 	matrix_print("V^T*T=",tjek2);
-	
-	printf("DelB---------------------------------------------\n");
 
 	gsl_matrix_free(A);
 	gsl_matrix_free(D);
@@ -153,5 +151,47 @@ int main(void){
 	gsl_matrix_free(tjek1);
 	gsl_matrix_free(tjek2);
 	gsl_vector_free(b);
+	printf("DelB---------------------------------------------\n");
+	//Bygger Hamilton operatoren:
+	printf("Jeg har konstrueret og diagonaliseret Hamilton operatoren.\n");
+	printf("Egenværdierne kan ses sammen med de analytiske værdier i energy.txt\n");
+	printf("Egenfunktionerne kan ses i eigen.png og egenværdierne er plottet i energy.png");
+	n=50;
+	double s=1.0/(n+1);
+	gsl_matrix* H = gsl_matrix_alloc(n,n);
+	for(int i=0;i<n-1;i++){
+		gsl_matrix_set(H,i,i,-2);
+		gsl_matrix_set(H,i,i+1,1);
+		gsl_matrix_set(H,i+1,i,1);
+	}
+	gsl_matrix_set(H,n-1,n-1,-2);
+	gsl_matrix_scale(H,-1/s/s);
+	//Diagonalisér matrixen:
+	gsl_matrix* X = gsl_matrix_alloc(n,n);
+	gsl_matrix_set_identity(X);
+	jacobi_diag(H,X);
+	//Tjekker om det er korrekt:
+	FILE * energy = fopen("energy.txt","w");
+	//fprintf(energy,"k exact calculated\n");
+	for (int k=0; k < n/3; k++){
+		double exact = M_PI*M_PI*(k+1)*(k+1);
+		double calculated = gsl_matrix_get(H,k,k);
+		fprintf(energy,"%i %g %g\n",k,calculated,exact);
+	}
+	fclose(energy);
+	FILE * eigen = fopen("eigen.txt","w");
+	for(int k=0;k<3;k++){
+		fprintf(eigen,"#INDEX %i\n",k);
+		fprintf(eigen,"0 0 0\n");
+		for(int i=0;i<n;i++){
+			double exact = sqrt(2)*sin((k+1)*M_PI*(i+1.0)/(n+1));
+			double calc = gsl_matrix_get(X,i,k)*(1/sqrt(s))*pow(-1,k); //Den normaliserede funktion. Hver anden har fået omvendt fortegn, er ikke sikker på hvorfor, men må gerne gange med en konstant.
+			fprintf(eigen,"%g %g %g\n",(i+1.0)/(n+1), calc, exact);
+		}
+		fprintf(eigen,"1 0 0\n\n\n");
+	}	
+	fclose(eigen);
+	
+	
 return 0;
 }
