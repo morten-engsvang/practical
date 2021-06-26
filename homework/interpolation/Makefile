@@ -4,9 +4,25 @@ LDLIBS = -lm
 LDLIBS += $(shell gsl-config --libs)
 length = $(shell wc -l input.txt | cut -f1 -d ' ')
 z = 4
-.PHONY: plot.svg
+default: plot.svg quad.svg int_afledt.svg
 
-plot.svg: default
+int_afledt.svg: input.txt Makefile 
+	echo '\
+	set term svg background rgb "white";\
+	set out "$@";\
+	set xlabel "t";\
+	set ylabel "y";\
+	set tics out;\
+	set key out;\
+	set title "Integral and derivative using interpolation" ;\
+	plot "quadinteg.txt" using 1:2 with lines title "Quadratic integral"\
+	,"quadderiv.txt" using 1:2 with lines title "Quadratic derivative"\
+	,"lininteg.txt" using 1:2 with lines title "Linear Integral"\
+	,"outlinteg.txt" using 1:2 with lines title "Linear Integral using GSL"\
+	'|gnuplot
+
+
+plot.svg: input.txt Makefile
 	echo '\
 	set term svg background rgb "white";\
 	set out "$@";\
@@ -21,14 +37,27 @@ plot.svg: default
 	'|gnuplot
 
 
+quad.svg: input.txt Makefile
+	echo '\
+	set term svg background rgb "white";\
+	set out "$@";\
+	set xlabel "t";\
+	set ylabel "y";\
+	set tics out;\
+	set key out;\
+	set title "Input points and quadratically interpolated points" ;\
+	plot "outquadspline.txt" using 1:2 with lines title "Quadratic interpolation"\
+	,"input.txt" using 1:2 with points ls 6 title "Input points"\
+	'|gnuplot
 
-default: main
+
+input.txt: main
 	./$< input.txt $(length) 4
 
-main: main.o binsearch.o
+main: main.o binsearch.o spline.o
 
-main.o binsearch.o: binsearch.h
+main.o binsearch.o spline.o: binsearch.h
 
 
 clean:
-	$(RM) *.o main out_data.txt outlinteg.txt outlspline.txt out.txt *.png *.svg
+	$(RM) *.o main out_data.txt outlinteg.txt outlspline.txt out.txt *.png *.svg outquadspline.txt quadinteg.txt quadderiv.txt lininteg.txt

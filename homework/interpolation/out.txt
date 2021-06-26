@@ -1,4 +1,9 @@
 Følgende er for lineær interpolation.
 For z=4 er det interpolerede punkt via. min implementering: 16
 For z=4 giver integralet fra starten af datasættet til z: 21.5
+Interpoleringen kan ses i plot.svg, integralet i int_afledt.svg
 For z = 4, så giver GSL integralet som: 21.5
+
+Følgende er for quadritic interpolation:
+Interpoleringen kan ses i quad.svgIntegralet til og med 4 er 23 i følge quadratic interpolation.
+Den afledte i punktet er: -4Integralet og den afledte kan findes i int_afledt.svg
