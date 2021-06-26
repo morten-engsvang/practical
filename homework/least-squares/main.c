@@ -53,7 +53,7 @@ int main(void){
 	//Stjæler assignment af mine x og y værdier fra Fedorov:
 	double x[] = {1, 2, 3, 4, 6, 9, 10, 13, 15};
 	double y[] = {117, 100, 88, 72, 53, 29.5, 25.2, 15.2, 11.1};
-	int n=sizeof(x)/sizeof(x[0]);
+	int n=sizeof(x)/sizeof(x[0]); //Finder længden af x.
 	//Finder først normal usikkerhed:
 	double dy[n];
 	for(int i=0;i<n;i++){
