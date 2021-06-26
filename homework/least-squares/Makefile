@@ -31,4 +31,4 @@ main: main.o decomp.o
 main.o decomp.o: decomp.h
 
 clean:
-	$(RM) *.o main *.txt *.svg
+	$(RM) *.o main out.txt data.txt *.svg

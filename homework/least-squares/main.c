@@ -49,11 +49,18 @@ void least_squares(int m, double f(int i,double x), gsl_vector* x, gsl_vector* y
 }
 
 
+
 int main(void){
-	//Stjæler assignment af mine x og y værdier fra Fedorov:
-	double x[] = {1, 2, 3, 4, 6, 9, 10, 13, 15};
-	double y[] = {117, 100, 88, 72, 53, 29.5, 25.2, 15.2, 11.1};
-	int n=sizeof(x)/sizeof(x[0]); //Finder længden af x.
+	FILE * input = fopen("input.txt","r");
+	int n = 9;
+	gsl_matrix* datamat = gsl_matrix_alloc(n,2);
+	gsl_matrix_fscanf(input,datamat);
+	double x[n];
+	double y[n];
+	for (int i = 0; i < n; i++){
+		x[i] = gsl_matrix_get(datamat,i,0);
+		y[i] = gsl_matrix_get(datamat,i,1);
+	}
 	//Finder først normal usikkerhed:
 	double dy[n];
 	for(int i=0;i<n;i++){
@@ -118,7 +125,7 @@ int main(void){
 	printf("half-life = %.3g days\n",T);
 	printf("The modern value is 3.63 days\n");
 	printf("\nDel B:\n");
-	printf("My value with uncertainty is: %.3g+-%.2g",T,dT);
+	printf("My value with uncertainty is: %.3g+-%.2g\n",T,dT);
 	printf("Therefore it does not agree with the modern value.\n");
 	
 	FILE* data = fopen("data.txt","w");
