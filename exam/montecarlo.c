@@ -57,7 +57,7 @@ double vandercorput (int n, int base){
 
 void halton (int n, int dim, gsl_vector* a, gsl_vector* b, gsl_vector* x){
 	//Implementeringen af Halton sekvensen, generaliseringen til d dimensioner
-	int base [] = {2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67};
+	int base [] = {2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,73,83,89,101};
 	for (int i = 0; i < dim; i++){
 		gsl_vector_set(x,i,gsl_vector_get(a,i)+vandercorput(n+1,base[i])*(gsl_vector_get(b,i)-gsl_vector_get(a,i)));
 	}
@@ -67,7 +67,8 @@ void halton (int n, int dim, gsl_vector* a, gsl_vector* b, gsl_vector* x){
 
 void halton2 (int n, int dim, gsl_vector* a, gsl_vector* b, gsl_vector* x){
 	//Implementeringen af Halton sekvensen, generaliseringen til d dimensioner
-	int base [] = {3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83};
+	//int base [] = {3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83};
+	int base [] = {7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,101};
 	for (int i = 0; i < dim; i++){
 		gsl_vector_set(x,i,gsl_vector_get(a,i)+vandercorput(n+1,base[i])*(gsl_vector_get(b,i)-gsl_vector_get(a,i)));
 	}

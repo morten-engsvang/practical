@@ -1,0 +1,27 @@
+The first integral to be attempted will be the integral given in exercise A of the Monte Carlo Integration.
+This will be done for the Plain Monte Carlo algorithm and the Quasi-random Monte Carlo algorithm using the Halton sequence
+For these I will calculate the error, for a given amount of sampling points, to which I will attempt to fit the function f(x)=a+b*1/sqrt(x)
+This is because the error from a random walk is expected to converge with 1/sqrt(N), where N is the amount of sampling points used.
+I use both the estimated error and the actual error such that I have two curves pr. algorithm pr. integral.
+The fitting is done by defining a function that returns the error between the fitting function and the points and minimising it using
+the quasi-newton algorithm from the Minimisation exercise.
+The result of this can be found in plot_plain.svg and plot_halton.svg
+
+Start of technical information:
+Number of datapoints: 41
+The scaling values are 0.509052 0.763266 1.97873 0.586907
+The offset values are 0.0488013 0.0653481 -0.0578375 0.10261
+The steps used are 5000 5000 263 694
+
+It can be observed that the fit is far from optimal especially for larger N, which is primarily due to the large error values for small N which can give very large errors.
+This is even the case when I start at N = 7 as I have done here.
+
+The second integral I will be looking at is a 1D integral: 4*sqrt(1-x^2) from 0 to 1 which is supposed to give pi
+
+Start of technical information:
+Number of datapoints: 45
+The scaling values are 0.76071 0.37973 0.262868 1.07077
+The offset values are 0.00443501 0.0187129 -0.00568835 -0.0239754
+The steps used are 755 5000 5000 5000
+
+This is integral is much better behaved, and it can be seen that the fit of the 1/sqrt(x) is much better at describing the trend.
