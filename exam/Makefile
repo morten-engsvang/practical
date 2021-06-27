@@ -77,4 +77,4 @@ main: main.o montecarlo.o minimum.o
 main.o montecarlo.o minimum.o: montecarlo.h minimum.h
 
 clean:
-	$(RM) *.o main *.txt *.err *.svg
+	$(RM) *.o main out.txt fit.txt fit2.txt plot.txt plot2.txt *.err *.svg

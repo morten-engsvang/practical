@@ -9,6 +9,7 @@ The result of this can be found in plot_plain.svg and plot_halton.svg
 
 Start of technical information:
 Number of datapoints: 41
+The following is for plainmc estimate err, plainmc actual err, halton estimate err, halton actual err respectively:
 The scaling values are 0.509052 0.763266 1.97873 0.586907
 The offset values are 0.0488013 0.0653481 -0.0578375 0.10261
 The steps used are 5000 5000 263 694
@@ -20,8 +21,14 @@ The second integral I will be looking at is a 1D integral: 4*sqrt(1-x^2) from 0 
 
 Start of technical information:
 Number of datapoints: 45
+The following is for plainmc estimate err, plainmc actual err, halton estimate err, halton actual err respectively:
 The scaling values are 0.76071 0.37973 0.262868 1.07077
 The offset values are 0.00443501 0.0187129 -0.00568835 -0.0239754
 The steps used are 755 5000 5000 5000
 
 This is integral is much better behaved, and it can be seen that the fit of the 1/sqrt(x) is much better at describing the trend.
+
+Comments on the convergence rate:
+For integral 1 it can be seen that the fit to the actual error gives the result that the Halton Monte Carlo Algorithm convergence is faster due to lower scaling
+However for integral 2 this trend is reversed where the plain Monte Carlo Algorithm convergence is faster
+I am more inclined to believe the results from the second integral since it looks to be much better described by the fitted function.

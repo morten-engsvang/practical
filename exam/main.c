@@ -193,6 +193,7 @@ int main(void){
 	}
 	
 	fclose(fit);
+	printf("The following is for plainmc estimate err, plainmc actual err, halton estimate err, halton actual err respectively:\n");
 	
 	printf("The scaling values are %g %g %g %g\n",fabs(gsl_vector_get(scalings,0)),fabs(gsl_vector_get(scalings,1)),fabs(gsl_vector_get(scalings,2)),fabs(gsl_vector_get(scalings,3)));
 	
@@ -203,6 +204,7 @@ int main(void){
 	printf("It can be observed that the fit is far from optimal especially for larger N, which is primarily due to the large error values for small N which can give very large errors.\n");
 	
 	printf("This is even the case when I start at N = 7 as I have done here.\n");
+	
 	
 	printf("\nThe second integral I will be looking at is a 1D integral: 4*sqrt(1-x^2) from 0 to 1 which is supposed to give pi\n");
 	
@@ -315,6 +317,8 @@ int main(void){
 	
 	fclose(fit2);
 	
+	printf("The following is for plainmc estimate err, plainmc actual err, halton estimate err, halton actual err respectively:\n");
+	
 	printf("The scaling values are %g %g %g %g\n",fabs(gsl_vector_get(scalings,0)),fabs(gsl_vector_get(scalings,1)),fabs(gsl_vector_get(scalings,2)),fabs(gsl_vector_get(scalings,3)));
 	
 	printf("The offset values are %g %g %g %g\n",gsl_vector_get(offsets,0),gsl_vector_get(offsets,1),gsl_vector_get(offsets,2),gsl_vector_get(offsets,3));
@@ -323,6 +327,10 @@ int main(void){
 	
 	printf("This is integral is much better behaved, and it can be seen that the fit of the 1/sqrt(x) is much better at describing the trend.\n");
 	
+	printf("\nComments on the convergence rate:\n");
+	printf("For integral 1 it can be seen that the fit to the actual error gives the result that the Halton Monte Carlo Algorithm convergence is faster due to lower scaling\n");
+	printf("However for integral 2 this trend is reversed where the plain Monte Carlo Algorithm convergence is faster\n");
+	printf("I am more inclined to believe the results from the second integral since it looks to be much better described by the fitted function.\n");
 	
 	gsl_vector_free(a);
 	gsl_vector_free(b);
