@@ -13,6 +13,7 @@ When cleaned (make clean) this folder contains the following:
 	minimum.c:	Contains the quasi-newton minimisation algorith from the minimisation homework
 	minimum.h:	The corresponding header file to minimum.c
 	montecarlo.c:	Contains implementations of the plain Monte Carlo algorithm and the quasi-random Monte Carlo Algorithm using the Halton Sequence.
+	montecarlo.h: 	The corresponding header file to montecarlo.c
 	Makefile:	Creates plot_plain.svg, plot_plain2.svg, plot_halton.svg and plot_halton2.svg
 	README.txt:	The file currently being read :)
 
